@@ -1,3 +1,4 @@
+/* eslint-disable strict */
 class _Node{
   constructor(value,next){
     this.value = value,
