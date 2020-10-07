@@ -20,6 +20,7 @@ app.use(helmet());
 app.use('/api/auth', authRouter);
 app.use('/api/language', languageRouter);
 app.use('/api/user', userRouter);
+app.use('/api/head', languageRouter);
 
 app.use(errorHandler);
 
