@@ -50,7 +50,7 @@ languageRouter
 languageRouter
   .get('/head', async (req, res, next) => {
     try {
-      const [word] = await LanguageService.getWordById(
+      const [word] = await LanguageService.getWordsById(
         req.app.get('db'),
         req.language.head
       );
@@ -84,11 +84,11 @@ languageRouter
     try{
       const wordList = new LinkedList();
 
-      let [headNode] = await LanguageService.getWordById(db, req.language.head);
+      let [headNode] = await LanguageService.getWordsById(db, req.language.head);
       wordList.insertFirst(headNode);
 
       while (headNode.next !== null) {
-        const [nextNode] = await LanguageService.getWordById(db,headNode.next);
+        const [nextNode] = await LanguageService.getWordsById(db,headNode.next);
         wordList.insertLast(nextNode);
         headNode = nextNode;
       }
