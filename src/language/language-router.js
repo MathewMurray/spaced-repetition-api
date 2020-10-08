@@ -85,9 +85,6 @@ languageRouter
     }
 
     try{
-
-
-      
       const wordList = new LinkedList();
 
       let [headNode] = await LanguageService.getWordsById(db, req.language.head);
