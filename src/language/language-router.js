@@ -11,6 +11,7 @@ const languageRouter = express.Router()
 languageRouter
   .use(requireAuth)
   .use(async (req, res, next) => {
+    //console.log(LanguageService)
     try {
       const language = await LanguageService.getUsersLanguage(
         req.app.get('db'),
@@ -50,10 +51,11 @@ languageRouter
 languageRouter
   .get('/head', async (req, res, next) => {
     try {
-      const [word] = await LanguageService.getWordById(
+      const [word] = await LanguageService.getWordsById(
         req.app.get('db'),
         req.language.head
       );
+      ///console.log(word);
 
       res.json({
         nextWord:word.original,
@@ -71,10 +73,11 @@ languageRouter
   .post('/guess', jsonParser, async (req, res, next) => {
     const db = req.app.get('db');
     const {guess} = req.body;
+    
     const userGuess = guess
     let currentHead = req.language.head;
     let previousWord = currentHead
-
+    
     if(!userGuess){
       return res.status(400).json({
         error: `Missing 'guess' in request body`,
@@ -82,17 +85,21 @@ languageRouter
     }
 
     try{
+
+
+      
       const wordList = new LinkedList();
 
-      let [headNode] = await LanguageService.getWordById(db, req.language.head);
+      let [headNode] = await LanguageService.getWordsById(db, req.language.head);
       wordList.insertFirst(headNode);
-
+      
       while (headNode.next !== null) {
-        const [nextNode] = await LanguageService.getWordById(db,headNode.next);
+        
+        const [nextNode] = await LanguageService.getWordsById(db,headNode.next);
         wordList.insertLast(nextNode);
         headNode = nextNode;
       }
-
+      
       let isCorrect = false;
       if(guess.toLowerCase() === wordList.head.value.translation.toLowerCase()){
         isCorrect = true;
@@ -143,6 +150,7 @@ languageRouter
       };
       return res.status(200).json(response)
     } catch(error) {
+      console.log("Error");
       next(error)
     }
   })

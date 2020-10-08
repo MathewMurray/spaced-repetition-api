@@ -21,7 +21,7 @@ class LinkedList {
     } else {
       let tempNode = this.head;
       while(tempNode.next !== null){
-        tempNode - tempNode.next;
+        tempNode = tempNode.next;
       }
       tempNode.next = new _Node(word,null);
     }

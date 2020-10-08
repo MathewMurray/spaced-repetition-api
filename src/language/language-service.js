@@ -45,7 +45,7 @@ const LanguageService = {
     .update({head})
   },
 
-  updateTotalSCore(db,id,user_id,total_score){
+  updateTotalScore(db,id,user_id,total_score){
     return db('language')
     .where({id,user_id})
     .update({total_score})
