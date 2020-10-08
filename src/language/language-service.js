@@ -16,17 +16,9 @@ const LanguageService = {
   getLanguageWords(db, language_id) {
     return db
       .from('word')
-      .select(
-        'id',
-        'language_id',
-        'original',
-        'translation',
-        'next',
-        'memory_value',
-        'correct_count',
-        'incorrect_count',
-      )
+      .select()
       .where({ language_id })
+      .orderBy('id','asc');
   },
 
   getWordsById(db,id){

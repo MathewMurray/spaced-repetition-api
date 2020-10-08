@@ -54,7 +54,7 @@ class LinkedList {
     if(currNode === null){
       return;
     }
-    prevNode.next = new _Node(itemToInsert,currNode);
+    prevNode.next = new _Node(wordToInsert,currNode);
   }
 
   insertAt(n, wordToInsert){
@@ -93,7 +93,7 @@ class LinkedList {
 
     let currNode = this.head;
     let previousNode = this.head;
-    while(currNode != null && currNode.value !== word){
+    while(currNode !== null && currNode.value !== word){
       previousNode = currNode;
       currNode = currNode.next;
     }

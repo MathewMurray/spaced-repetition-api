@@ -68,7 +68,7 @@ languageRouter
   })
 
 languageRouter
-  .post('/guess', async (req, res, next) => {
+  .post('/guess', jsonParser, async (req, res, next) => {
     const db = req.app.get('db');
     const {guess} = req.body;
     const userGuess = guess
@@ -113,13 +113,13 @@ languageRouter
       while (tempNode !== null){
         await LanguageService.updateWords(
           db,
-          temp.value,
+          tempNode.value,
           tempNode.next !== null ? tempNode.next.value : null
         );
         tempNode = tempNode.next;
       }
 
-      await LanguageService.uodateHead(
+      await LanguageService.updateHead(
         db,
         req.language.id,
         req.language.user_id,
